@@ -19,7 +19,7 @@
         </div>
 
         <div class="scanner-controls">
-            <input type="text" id="scanner" placeholder="Scan IMEI Here..." oninput="handleKeyPress(event)">
+            <input type="text" id="scanner" placeholder="Scan IMEI Here..." onkeyup="handleKeyPress(event)">
             <button onclick="checkIMEI()">Enter</button>
             <button onclick="skipIMEI()">Skip</button>
         </div>
