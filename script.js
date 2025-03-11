@@ -26,7 +26,8 @@ function uploadPicklist() {
             return;
         }
         statusText.textContent = "✅ File uploaded successfully!";
-
+        
+        // ✅ Auto-hide success message & hide upload UI
         setTimeout(() => {
             statusText.textContent = "";
             uploadSection.style.display = "none";
@@ -94,10 +95,111 @@ function displayOrders() {
     highlightNextIMEI();
 }
 
-// ✅ Highlight Next IMEI
+// ✅ Highlight Next IMEI & Auto-Scroll
 function highlightNextIMEI() {
-    let nextIndex = orders.findIndex((_, index) => !document.getElementById(`row-${index}`).classList.contains("green"));
+    let nextIndex = orders.findIndex((_, index) => 
+        !document.getElementById(`row-${index}`).classList.contains("green") &&
+        !document.getElementById(`row-${index}`).classList.contains("orange")
+    );
+
     if (nextIndex === -1) return;
+
     currentIndex = nextIndex;
     let activeRow = document.getElementById(`row-${currentIndex}`);
-    if (activeRow) activeRow.classList
+    
+    // ✅ Ensure proper scrolling to keep the IMEI in view
+    if (activeRow) {
+        activeRow.classList.add("next");
+        activeRow.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+}
+
+// ✅ Check IMEI
+function checkIMEI() {
+    let scannerInput = document.getElementById("scanner").value.trim();
+    let resultRow = document.getElementById(`row-${currentIndex}`);
+
+    if (!resultRow) return;
+    if (scannerInput === orders[currentIndex].imei) {
+        resultRow.classList.remove("next", "red", "orange");
+        resultRow.classList.add("green");
+        resultRow.removeAttribute("onclick");
+
+        skippedOrders = skippedOrders.filter(entry => entry.index !== currentIndex);
+        updateSkippedList();
+
+        moveToNextUnscannedIMEI();
+    } else {
+        resultRow.classList.add("red");
+        setTimeout(() => resultRow.classList.remove("red"), 2000);
+    }
+    document.getElementById("scanner").value = "";
+}
+
+// ✅ Skip IMEI
+function skipIMEI() {
+    let resultRow = document.getElementById(`row-${currentIndex}`);
+    if (!resultRow) return;
+
+    resultRow.classList.remove("next");
+    resultRow.classList.add("orange");
+
+    if (!skippedOrders.some(entry => entry.index === currentIndex)) {
+        skippedOrders.push({ index: currentIndex, order: orders[currentIndex] });
+    }
+
+    updateSkippedList();
+    moveToNextUnscannedIMEI();
+}
+
+// ✅ Move to Next Unscanned IMEI
+function moveToNextUnscannedIMEI() {
+    let nextIndex = orders.findIndex((_, index) => 
+        !document.getElementById(`row-${index}`).classList.contains("green") &&
+        !document.getElementById(`row-${index}`).classList.contains("orange")
+    );
+
+    if (nextIndex === -1) return;
+
+    currentIndex = nextIndex;
+    highlightNextIMEI();
+}
+
+// ✅ Update Skipped List
+function updateSkippedList() {
+    let skippedTable = document.getElementById("skipped-orders");
+    skippedTable.innerHTML = "";
+
+    let uniqueSkipped = Array.from(new Map(skippedOrders.map(item => [item.order.imei, item])).values());
+    uniqueSkipped.forEach((entry) => {
+        let newRow = document.createElement("tr");
+        newRow.setAttribute("data-index", entry.index);
+        newRow.setAttribute("onclick", `undoSpecificSkip(${entry.index})`);
+        newRow.innerHTML = `<td>${entry.order.order}</td><td>${entry.order.imei}</td><td>${entry.order.model}</td><td>${entry.order.storage}</td><td>${entry.order.color}</td><td>${entry.order.location}</td>`;
+        skippedTable.appendChild(newRow);
+    });
+}
+
+// ✅ Undo Skipped IMEI (With 5-second Timeout)
+function undoSpecificSkip(index) {
+    let row = document.getElementById(`row-${index}`);
+    if (!row) return;
+
+    row.classList.remove("orange");
+    row.classList.add("next");
+
+    skippedOrders = skippedOrders.filter(entry => entry.index !== index);
+    updateSkippedList();
+
+    currentIndex = index;
+    highlightNextIMEI();
+
+    // ✅ If the user doesn't scan within 5 seconds, return to orange
+    setTimeout(() => {
+        if (row.classList.contains("next")) {
+            row.classList.remove("next");
+            row.classList.add("orange");
+            highlightNextIMEI();
+        }
+    }, 5000);
+}
