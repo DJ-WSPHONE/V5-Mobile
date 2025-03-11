@@ -7,24 +7,23 @@
 </head>
 <body>
 
+    <!-- ✅ Fixed Header Section -->
+    <div class="fixed-header">
+        <h1>IMEI Pick List Scanner</h1>
 
-       <div id="uploadSection">
+        <!-- ✅ Upload Section -->
+        <div id="uploadSection">
             <input type="file" id="picklistUpload">
             <button onclick="uploadPicklist()">Upload</button>
             <p id="uploadStatus"></p>
         </div>
 
-    
-
-
-    <!-- ✅ Fixed Header Section -->
-    <div class="fixed-header">
-        <h1>IMEI Pick List Scanner</h1>
         <div class="scanner-controls">
-            <input type="text" id="scanner" placeholder="Scan IMEI Here..." onkeypress="handleKeyPress(event)">
+            <input type="text" id="scanner" placeholder="Scan IMEI Here..." oninput="handleKeyPress(event)">
             <button onclick="checkIMEI()">Enter</button>
             <button onclick="skipIMEI()">Skip</button>
         </div>
+
         <h2>Active IMEI List</h2>
     </div>
 
