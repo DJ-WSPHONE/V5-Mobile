@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 10px;
+    overflow: hidden; /* Prevent full-page scrolling */
 }
 
 .container {
@@ -10,34 +11,45 @@ body {
     text-align: left;
 }
 
-input[type="text"], button, input[type="file"] {
-    font-size: 18px;
-    padding: 12px;
-    margin: 8px 0;
+/* ✅ Fixed Header at the Top */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 400px;
+    background: white;
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Scanner Controls */
+.scanner-controls {
     text-align: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 10px;
 }
 
-button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
+/* ✅ Scrollable Table */
+.table-container {
+    margin-top: 200px; /* Push table down to avoid overlap */
+    height: calc(100vh - 230px); /* Limit height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal scrolling */
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
+/* ✅ Keep Table Headers Fixed */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
     font-size: 14px;
+    position: relative;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
 }
 
 th, td {
@@ -50,6 +62,7 @@ th {
     background-color: #f4f4f4;
 }
 
+/* ✅ Row Highlighting */
 .next {
     background-color: yellow;
 }
