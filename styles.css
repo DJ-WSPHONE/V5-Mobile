@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 10px;
+}
+
+.container {
+    width: 95%;
+    margin: auto;
+    text-align: left;
+}
+
+input[type="text"], button, input[type="file"] {
+    font-size: 18px;
+    padding: 12px;
+    margin: 8px 0;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.next {
+    background-color: yellow;
+}
+
+.green {
+    background-color: lightgreen;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.red {
+    background-color: lightcoral;
+}
+
+/* Flash Red Animation */
+@keyframes flashRed {
+    0% { background-color: red; }
+    50% { background-color: #ff9999; }
+    100% { background-color: red; }
+}
+
+.error {
+    animation: flashRed 0.5s alternate;
+    animation-iteration-count: 4;
+}
