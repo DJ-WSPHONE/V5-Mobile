@@ -11,7 +11,7 @@
     <div class="fixed-header">
         <h1>IMEI Pick List Scanner</h1>
         <div class="scanner-controls">
-            <input type="text" id="scanner" placeholder="Scan IMEI Here..." oninput="handleKeyPress(event)">
+            <input type="text" id="scanner" placeholder="Scan IMEI Here..." onkeypress="handleKeyPress(event)">
             <button onclick="checkIMEI()">Enter</button>
             <button onclick="skipIMEI()">Skip</button>
         </div>
