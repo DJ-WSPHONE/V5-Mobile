@@ -26,8 +26,8 @@ function uploadPicklist() {
             return;
         }
         statusText.textContent = "✅ File uploaded successfully!";
-
-        // ✅ Hide upload section after 3 seconds
+        
+        // ✅ Auto-hide success message & hide upload UI
         setTimeout(() => {
             statusText.textContent = "";
             uploadSection.style.display = "none";
