@@ -95,20 +95,32 @@ function displayOrders() {
     highlightNextIMEI();
 }
 
-// ✅ Highlight Next IMEI & Auto-Scroll
-function highlightNextIMEI() {
-    let nextIndex = orders.findIndex((_, index) => 
-        !document.getElementById(`row-${index}`).classList.contains("green") &&
-        !document.getElementById(`row-${index}`).classList.contains("orange")
-    );
+// ✅ Check IMEI
+function checkIMEI() {
+    let scannerInput = document.getElementById("scanner").value.trim();
+    let resultRow = document.getElementById(`row-${currentIndex}`);
 
-    if (nextIndex === -1) return;
-
-    currentIndex = nextIndex;
-    let activeRow = document.getElementById(`row-${currentIndex}`);
-    
-    if (activeRow) {
-        activeRow.classList.add("next");
-        activeRow.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (!resultRow) return;
+    if (scannerInput === orders[currentIndex].imei) {
+        resultRow.classList.remove("next", "red", "orange");
+        resultRow.classList.add("green");
+        moveToNextUnscannedIMEI();
+    } else {
+        resultRow.classList.add("red");
+        setTimeout(() => resultRow.classList.remove("red"), 2000);
     }
+    document.getElementById("scanner").value = "";
+}
+
+// ✅ Skip IMEI
+function skipIMEI() {
+    let resultRow = document.getElementById(`row-${currentIndex}`);
+    if (!resultRow) return;
+
+    resultRow.classList.remove("next");
+    resultRow.classList.add("orange");
+
+    skippedOrders.push({ index: currentIndex, order: orders[currentIndex] });
+    updateSkippedList();
+    moveToNextUnscannedIMEI();
 }
