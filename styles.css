@@ -1,55 +1,66 @@
+/* General Page Styles */
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 10px;
+    margin: 0;
+    padding: 0;
     overflow: hidden; /* Prevent full-page scrolling */
 }
 
-.container {
-    width: 95%;
-    margin: auto;
-    text-align: left;
-}
-
-/* ✅ Fixed Header at the Top */
+/* ✅ Fixed Header */
 .fixed-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     background: white;
-    padding: 10px;
-    z-index: 1000;
+    padding: 10px 0;
+    text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
-/* ✅ Scanner Controls */
+/* ✅ Adjust Scanner Controls */
 .scanner-controls {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.scanner-controls input {
+    width: 200px;
     padding: 10px;
+    font-size: 16px;
+}
+
+.scanner-controls button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.scanner-controls button:hover {
+    background-color: #0056b3;
 }
 
 /* ✅ Scrollable Table */
 .table-container {
-    margin-top: 200px; /* Push table down to avoid overlap */
-    height: calc(100vh - 230px); /* Limit height for scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
-    overflow-x: hidden; /* Hide horizontal scrolling */
+    position: absolute;
+    top: 150px; /* Push table below the fixed header */
+    bottom: 0;
+    width: 100%;
+    overflow-y: auto;
+    padding-bottom: 20px;
 }
 
-/* ✅ Keep Table Headers Fixed */
+/* ✅ Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
-    position: relative;
-}
-
-thead {
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 10;
 }
 
 th, td {
@@ -60,9 +71,12 @@ th, td {
 
 th {
     background-color: #f4f4f4;
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
-/* ✅ Row Highlighting */
+/* ✅ Row Colors */
 .next {
     background-color: yellow;
 }
@@ -77,16 +91,4 @@ th {
 
 .red {
     background-color: lightcoral;
-}
-
-/* Flash Red Animation */
-@keyframes flashRed {
-    0% { background-color: red; }
-    50% { background-color: #ff9999; }
-    100% { background-color: red; }
-}
-
-.error {
-    animation: flashRed 0.5s alternate;
-    animation-iteration-count: 4;
 }
