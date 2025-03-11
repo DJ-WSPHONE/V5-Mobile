@@ -6,6 +6,12 @@ window.onload = function () {
     document.getElementById("scanner").focus();
 };
 
+   <div id="uploadSection">
+            <input type="file" id="picklistUpload">
+            <button onclick="uploadPicklist()">Upload</button>
+            <p id="uploadStatus"></p>
+        </div>
+
 // ✅ Upload Pick List
 function uploadPicklist() {
     let fileInput = document.getElementById("picklistUpload");
