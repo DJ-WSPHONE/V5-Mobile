@@ -6,52 +6,48 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+
+    <!-- ✅ Fixed Header Section -->
+    <div class="fixed-header">
         <h1>IMEI Pick List Scanner</h1>
-
-        <div id="uploadSection">
-            <input type="file" id="picklistUpload">
-            <button onclick="uploadPicklist()">Upload</button>
-            <p id="uploadStatus"></p>
+        <div class="scanner-controls">
+            <input type="text" id="scanner" placeholder="Scan IMEI Here..." oninput="handleKeyPress(event)">
+            <button onclick="checkIMEI()">Enter</button>
+            <button onclick="skipIMEI()">Skip</button>
         </div>
-
-        <input type="text" id="scanner" placeholder="Scan IMEI Here..." oninput="handleKeyPress(event)">
-        <button onclick="checkIMEI()">Enter</button>
-        <button onclick="skipIMEI()">Skip</button>
-
         <h2>Active IMEI List</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Order Number</th>
-                        <th>IMEI</th>
-                        <th>Model</th>
-                        <th>Storage</th>
-                        <th>Color</th>
-                        <th>Location</th>
-                    </tr>
-                </thead>
-                <tbody id="orders"></tbody>
-            </table>
-        </div>
+    </div>
+
+    <!-- ✅ Scrollable Table Section -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>IMEI</th>
+                    <th>Model</th>
+                    <th>Storage</th>
+                    <th>Color</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody id="orders"></tbody>
+        </table>
 
         <h2>Skipped IMEIs</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Order Number</th>
-                        <th>IMEI</th>
-                        <th>Model</th>
-                        <th>Storage</th>
-                        <th>Color</th>
-                        <th>Location</th>
-                    </tr>
-                </thead>
-                <tbody id="skipped-orders"></tbody>
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>IMEI</th>
+                    <th>Model</th>
+                    <th>Storage</th>
+                    <th>Color</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody id="skipped-orders"></tbody>
+        </table>
     </div>
 
     <script src="script.js"></script>
