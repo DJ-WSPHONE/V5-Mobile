@@ -1,67 +1,32 @@
-/* General Page Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Prevent full-page scrolling */
-}
-
-/* ✅ Fixed Header */
-.fixed-header {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* ✅ Fix Table Cutoff */
+table {
     width: 100%;
-    background: white;
-    padding: 10px 0;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 14px;
 }
 
 /* ✅ Scrollable Table */
 .table-container {
     position: absolute;
-    top: 180px;
+    top: 200px;
     bottom: 0;
     width: 100%;
     overflow-y: auto;
     padding-bottom: 20px;
 }
 
-/* ✅ Table Styling */
-table {
+/* ✅ Fix Header */
+.fixed-header {
+    position: fixed;
     width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-
-th, td {
+    background: white;
     padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #f4f4f4;
-    position: sticky;
-    top: 0;
-    z-index: 999;
+    z-index: 1000;
 }
 
 /* ✅ Row Colors */
-.next {
-    background-color: yellow;
-}
-
-.green {
-    background-color: lightgreen;
-}
-
-.orange {
-    background-color: orange;
-}
-
-.red {
-    background-color: lightcoral;
-}
+.next { background-color: yellow; }
+.green { background-color: lightgreen; }
+.orange { background-color: orange; }
+.red { background-color: lightcoral; }
