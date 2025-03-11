@@ -203,3 +203,30 @@ function undoSpecificSkip(index) {
         }
     }, 5000);
 }
+
+function highlightNextIMEI() {
+    orders.forEach((_, index) => {
+        let row = document.getElementById(`row-${index}`);
+        if (!row.classList.contains("green") && !row.classList.contains("orange")) {
+            row.classList.remove("next", "red");
+        }
+    });
+
+    let nextIndex = orders.findIndex((_, index) => 
+        !document.getElementById(`row-${index}`).classList.contains("green") &&
+        !document.getElementById(`row-${index}`).classList.contains("orange")
+    );
+
+    if (nextIndex === -1) return;
+
+    currentIndex = nextIndex;
+    let activeRow = document.getElementById(`row-${currentIndex}`);
+    if (activeRow) {
+        activeRow.classList.add("next");
+
+        // ✅ Auto-scroll to keep the next IMEI visible
+        let tableContainer = document.querySelector(".table-container");
+        let rowPosition = activeRow.offsetTop;
+        tableContainer.scrollTo({ top: rowPosition - 60, behavior: "smooth" });
+    }
+}
