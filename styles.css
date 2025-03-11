@@ -19,37 +19,10 @@ body {
     z-index: 1000;
 }
 
-/* ✅ Adjust Scanner Controls */
-.scanner-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.scanner-controls input {
-    width: 200px;
-    padding: 10px;
-    font-size: 16px;
-}
-
-.scanner-controls button {
-    padding: 10px 15px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.scanner-controls button:hover {
-    background-color: #0056b3;
-}
-
 /* ✅ Scrollable Table */
 .table-container {
     position: absolute;
-    top: 150px; /* Push table below the fixed header */
+    top: 180px;
     bottom: 0;
     width: 100%;
     overflow-y: auto;
